@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>AiQ_dashboard</title>
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<link rel="stylesheet" href="../static/css/semantic.min.css">
+<script src="../static/script/jquery.min.js"></script>
+<script src="../static/lib/csmapi.js"></script>
+<script src="../static/lib/demo_frame2.js"></script>
+</head>
+
+<body>
+<div style="padding:1.5em">
+	  <div class="row" align="center">
+			<div class="offset-lg-1 col-md-3 offset-md-1 col-sm-3 offset-sm-1 col-lg-2">
+		  		<h3>
+					Dongle_ID: <br>
+					<a id="dg">XXXXXXXXXXXX</a>
+				</h3> 
+		  	</div>
+			<div class="col-md-3 offset-md-1 col-sm-3 offset-sm-1 col-lg-2 offset-lg-2">
+				<h3>
+					Gateway_ID: <br>
+					<a id="gw">XXXXXXXXXXXX</a>
+				</h3>
+			</div>
+			<div class="col-lg-2 col-md-3 offset-md-1 col-sm-3 offset-sm-1 offset-lg-2">
+				<h3>
+					Power_State:<br>
+					<a id="pw_icon"><img src="../static/icon/battery_5-5.png" width="20" height="34" style="transform:rotate(90deg);"></a>&ensp;
+					<a id="pw">0</a>
+					<a>%</a>
+				</h3>
+			</div>
+		</div>
+		<hr>
+		<div>
+			<div class="ui huge horizontal list">
+			  <div class="item" align="center">
+				<img class="ui avatar image" src="../static/icon/HR.png">
+				<div class="content">
+				  <div class="header">心率(HR)</div>
+				  <a id="hr">60-100</a>&ensp;bpm
+				</div>
+			  </div>
+			  <div class="item" align="center">
+				<img class="ui avatar image" src="../static/icon/RR.png">
+				<div class="content">
+				  <div class="header">呼吸率(BR)</div>
+				  <a id="rr">12-20</a>&ensp;times/min
+				</div>
+			  </div>
+			  <div class="item" align="center">
+				<img class="ui avatar image" src="../static/icon/temp.png" >
+				<div class="content">
+				  <div class="header">體溫(BodyTemperature)</div>
+				  <a id="bt">35-36</a>&ensp;°C
+				</div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+$(document).ready(function() {
+    daiSDK = dai("D8FE",[],["BT-O","DongleID-O","GatewayID-O","HR-O","Power-O","RR-O"]);
+    $(window).on('iotTalkUpdate', function(e) {
+		console.log(e)
+        var arr = e.dataArr;
+		console.log(arr)
+		if(e.df_name=="DongleID-O"){
+			document.getElementById("dg").innerText=arr[0][1][0];
+		}else{
+		}
+		if(e.df_name=="BT-O"){
+			document.getElementById("bt").innerText=arr[0][1][0];
+		}
+		if(e.df_name=="GatewayID-O"){
+			document.getElementById("gw").innerText=arr[0][1][0];
+		}
+		if(e.df_name=="HR-O"){
+			document.getElementById("hr").innerText=arr[0][1][0];
+		}
+		if(e.df_name=="Power-O"){
+			document.getElementById("pw").innerText=arr[0][1][0];
+		}
+		if(e.df_name=="RR-O"){
+			document.getElementById("rr").innerText=arr[0][1][0];
+		}
+    });
+
+    //push idf 進資料 實作
+    setInterval(function() {
+        //daiSDK.refresh("xmas_control_odf");
+    }, 10000);
+});
+</script>
+</html>

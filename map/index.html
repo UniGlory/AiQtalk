@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>leaflet</title>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style>
+		#map {
+  			height: 1000px;
+  		}
+	.navbar-default {
+		
+		background-color: #fff6b8;
+		border-color: #fcdedc;
+	  }
+	  .navbar-default .navbar-brand {
+		color: #000000;
+	  }
+	  .navbar-default .navbar-brand:hover,
+	  .navbar-default .navbar-brand:focus {
+		color: #009f5a;
+	  }
+	  .navbar-default .navbar-text {
+		color: #000000;
+	  }
+	  .navbar-default .navbar-nav > li > a {
+		color: #000000;
+	  }
+	  .navbar-default .navbar-nav > li > a:hover,
+	  .navbar-default .navbar-nav > li > a:focus {
+		color: #009f5a;
+	  }
+	  .navbar-default .navbar-nav > li > .dropdown-menu {
+		background-color: #fff6b8;
+	  }
+	  .navbar-default .navbar-nav > li > .dropdown-menu > li > a {
+		color: #000000;
+	  }
+	  .navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
+	  .navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
+		color: #009f5a;
+		background-color: #fcdedc;
+	  }
+	  .navbar-default .navbar-nav > li > .dropdown-menu > li.divider {
+		background-color: #fcdedc;
+	  }
+	  .navbar-default .navbar-nav > .active > a,
+	  .navbar-default .navbar-nav > .active > a:hover,
+	  .navbar-default .navbar-nav > .active > a:focus {
+		color: #009f5a;
+		background-color: #f7d5d2;
+	  }
+	  .navbar-default .navbar-nav > .open > a,
+	  .navbar-default .navbar-nav > .open > a:hover,
+	  .navbar-default .navbar-nav > .open > a:focus {
+		color: #ff5e00ce;
+		background-color: #dcfdff;
+	  }
+	  .navbar-default .navbar-toggle {
+		border-color: #ffbbb5;
+	  }
+	  .navbar-default .navbar-toggle:hover,
+	  .navbar-default .navbar-toggle:focus {
+		background-color: #ffbbb5;
+	  }
+	  .navbar-default .navbar-toggle .icon-bar {
+		background-color: #e95f5f;
+	  }
+	  .navbar-default .navbar-collapse,
+	  .navbar-default .navbar-form {
+		border-color: #000000;
+	  }
+	  .navbar-default .navbar-link {
+		color: #000000;
+	  }
+	  .navbar-default .navbar-link:hover {
+		color: #009f5a;
+	  }
+	  
+	  @media (max-width: 767px) {
+		.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+		  color: #000000;
+		}
+		.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+		.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+		  color: #009f5a;
+		}
+		.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+		.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+		.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+		  color: #009f5a;
+		  background-color: #ffbbb5;
+		}
+      }
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+  		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+			  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><strong>智慧衣</strong> <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+				  <li><a id="pig" onclick="flyTo1([24.649000,121.7443800]);SH('i118');"><strong id="i118">Show</strong></a></li>
+				  <li><a id="pi" onclick="flyTo1([24.649000,121.7443800]);SH('i118',true);"><strong>亞大試驗場</strong></a></li>
+				</ul>
+				</li>
+			</ul>
+  		</div>
+	</nav>
+	<div id="map">
+	</div>
+</body>
+<script>
+	const flyTo1 = () => {
+      map.flyTo([24.045694, 120.685870]);  // 點到點的拋物線動畫 平移+縮放動畫
+    };
+	var map = L.map('map').setView([24.045694, 120.685870],19);
+	
+	var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+	var marker = L.marker([24.045694, 120.685870]).addTo(map).bindPopup("<b>AiQ_dashboard</b><br><a href=http://localhost/dashboard/ target=_blank>AiQ_dashboard</a>").openPopup();
+</script>
+</html>
